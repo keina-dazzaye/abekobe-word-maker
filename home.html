@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <meta name="description" content="" />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <h1>あべこべWordメーカー</h1>
+  <body>
+    <title>あべこべWordメーカー</title>
+
+    <table>
+      <p>文字を入力してね！(単語は半角スペースで区切ってね！)</p>
+      <input type="text" id="inputText" />
+      <button onclick="shuffle()">あべこべにする</button>
+
+      
+    </table>
+
+    <input type="text" id="output" disabled>←ここに表示されるよ！</input>
+
+
+    <script>
+      function shuffle() {
+        let element = document.getElementById("inputText");
+        let splitElement = element.value.split(" ");
+
+            let mixedWord1= splitElement.sort(()=>Math.random() - 0.5) ;
+            let lastMixedWord = mixedWord1.sort(() => Math.random() - 0.5);
+
+            let changeStr = lastMixedWord.join(" ");
+
+    /*if ( 
+    ①全角スペースが入っている or 
+    ②半角スペースが一つも入っていない or 
+    ③全角スペースのみしか入力されていない（elementが全角スペースである） or
+    ④半角スペースのみしか入力されていない（elementが半角スペースである） or
+    ⑤入力されていない（空文字である）
+    */
+       if(changeStr.includes("　") ||                 // 全角スペースが含まれている場合
+        !changeStr.includes(" ") ||                 // 半角スペースが一つも含まれていない場合
+        changeStr.trim() === "　" ||                // 全角スペースのみが入力されている場合
+        changeStr.trim() === " " ||                 // 半角スペースのみが入力されている場合
+         changeStr.trim() === ""  ){
+            alert("半角スペースで区切ってね！")
+                 return
+  }
+        
+        //間違えてたコード：  document.getElementById('output').textContent =`${mixedWord}`;
+        
+        document.getElementById('output').value= `${changeStr}`;
+  }
+    </script>
+  </body>
+</html>
